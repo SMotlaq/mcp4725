@@ -25,6 +25,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "MCP4725.h"
+#include "string.h"
+#include "stdlib.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,8 +62,6 @@ void SystemClock_Config(void);
 	// First, create an MCP4725 object:
 	MCP4725 myMCP4725;
 	
-	uint8_t isConnected = 2;
-	
 /* USER CODE END 0 */
 
 /**
@@ -91,22 +92,22 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_I2C1_Init();
+  MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
 		
 		// Second, initilaize the MCP4725 object:
-		myMCP4725 = MCP4725_init(&hi2c1, MCP4725A0_ADDR_A00, 3.30);
+		myMCP4725 = MCP4725_init(&hi2c2, MCP4725A0_ADDR_A00, 3.30);
 		
 		// Check the connection:
 		if(MCP4725_isConnected(&myMCP4725)==1){
 			
 			/* Print that the DAC is coonected */
-			isConnected = 1;
+
 		}
 		else{
 			
 			/* Print that the DAC is NOT coonected */
-			isConnected = 0;
+
 		}
 			
 		

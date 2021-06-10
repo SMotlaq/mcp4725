@@ -34,3 +34,6 @@ mcp4725\main.o: ../Core/Inc/i2c.h
 mcp4725\main.o: ../Core/Inc/gpio.h
 mcp4725\main.o: ..\MCP4725-lib\MCP4725.h
 mcp4725\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+mcp4725\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+mcp4725\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+mcp4725\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

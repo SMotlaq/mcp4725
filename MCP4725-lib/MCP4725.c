@@ -28,7 +28,7 @@
 /***************************************************************************************************/
 
 #include "MCP4725.h"
-
+#include "i2c.h"
 
 /**************************************************************************/
 /*
@@ -41,7 +41,7 @@ MCP4725 MCP4725_init(I2C_HandleTypeDef* hi2c, MCP4725Ax_ADDRESS addr, float refV
 {
 	MCP4725 _MCP4725;
 
-	_MCP4725._i2cAddress = addr;
+	_MCP4725._i2cAddress = (uint16_t)(addr<<1);
 	_MCP4725.hi2c = hi2c;
 
 	MCP4725_setReferenceVoltage(&_MCP4725, refV); //set _refVoltage & _bitsPerVolt variables
@@ -58,7 +58,12 @@ MCP4725 MCP4725_init(I2C_HandleTypeDef* hi2c, MCP4725Ax_ADDRESS addr, float refV
 /**************************************************************************/ 
 uint8_t MCP4725_isConnected(MCP4725* _MCP4725)
 {
-	return HAL_I2C_IsDeviceReady(_MCP4725->hi2c, _MCP4725->_i2cAddress, 10, 1000) == HAL_OK;
+	//return HAL_I2C_IsDeviceReady(&hi2c2, 0x60, 10, 1000) == HAL_OK;
+	
+	if (HAL_I2C_IsDeviceReady(_MCP4725->hi2c, _MCP4725->_i2cAddress, 2, 100)==HAL_OK)
+    return 1;
+  else
+    return 0;	
 }
 
 /**************************************************************************/

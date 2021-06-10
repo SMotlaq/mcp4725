@@ -32,3 +32,4 @@ mcp4725\mcp4725.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h
 mcp4725\mcp4725.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 mcp4725\mcp4725.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 mcp4725\mcp4725.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+mcp4725\mcp4725.o: ../Core/Inc/i2c.h
