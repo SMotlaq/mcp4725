@@ -30,10 +30,10 @@ mcp4725\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h
 mcp4725\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h
 mcp4725\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 mcp4725\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+mcp4725\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+mcp4725\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 mcp4725\main.o: ../Core/Inc/i2c.h
+mcp4725\main.o: ../Core/Inc/tim.h
 mcp4725\main.o: ../Core/Inc/gpio.h
 mcp4725\main.o: ..\MCP4725-lib\MCP4725.h
 mcp4725\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
-mcp4725\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-mcp4725\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-mcp4725\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

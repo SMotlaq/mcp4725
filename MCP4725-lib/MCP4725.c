@@ -58,12 +58,7 @@ MCP4725 MCP4725_init(I2C_HandleTypeDef* hi2c, MCP4725Ax_ADDRESS addr, float refV
 /**************************************************************************/ 
 uint8_t MCP4725_isConnected(MCP4725* _MCP4725)
 {
-	//return HAL_I2C_IsDeviceReady(&hi2c2, 0x60, 10, 1000) == HAL_OK;
-	
-	if (HAL_I2C_IsDeviceReady(_MCP4725->hi2c, _MCP4725->_i2cAddress, 2, 100)==HAL_OK)
-    return 1;
-  else
-    return 0;	
+	return HAL_I2C_IsDeviceReady(_MCP4725->hi2c, _MCP4725->_i2cAddress, 2, 100) == HAL_OK;
 }
 
 /**************************************************************************/
@@ -142,7 +137,7 @@ uint8_t MCP4725_setVoltage(MCP4725* _MCP4725, float voltage, MCP4725_COMMAND_TYP
   else if (voltage <= 0)					           value = 0;
   else                            					 value = voltage * _MCP4725->_bitsPerVolt; //xx,xx,xx,xx,D11,D10,D9,D8 ,D7,D6,D4,D3,D2,D9,D1,D0
   #else
-  value = voltage * _bitsPerVolt;                                											 //xx,xx,xx,xx,D11,D10,D9,D8 ,D7,D6,D4,D3,D2,D9,D1,D0
+  value = voltage * _MCP4725->_bitsPerVolt;                                											 //xx,xx,xx,xx,D11,D10,D9,D8 ,D7,D6,D4,D3,D2,D9,D1,D0
   #endif
 
   return MCP4725_writeComand(_MCP4725, value, mode, powerType);

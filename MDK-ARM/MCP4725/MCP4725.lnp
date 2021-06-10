@@ -3,6 +3,7 @@
 "mcp4725\main.o"
 "mcp4725\gpio.o"
 "mcp4725\i2c.o"
+"mcp4725\tim.o"
 "mcp4725\stm32f4xx_it.o"
 "mcp4725\stm32f4xx_hal_msp.o"
 "mcp4725\stm32f4xx_hal_i2c.o"

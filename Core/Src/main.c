@@ -20,14 +20,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "i2c.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "MCP4725.h"
-#include "string.h"
-#include "stdlib.h"
-#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,7 +51,7 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+uint8_t setValue(uint16_t value);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -62,6 +60,8 @@ void SystemClock_Config(void);
 	// First, create an MCP4725 object:
 	MCP4725 myMCP4725;
 	
+	uint32_t micro_seconds = 0;
+	uint16_t sine_Val = 0;
 /* USER CODE END 0 */
 
 /**
@@ -93,13 +93,14 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_I2C2_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 		
 		// Second, initilaize the MCP4725 object:
 		myMCP4725 = MCP4725_init(&hi2c2, MCP4725A0_ADDR_A00, 3.30);
 		
 		// Check the connection:
-		if(MCP4725_isConnected(&myMCP4725)==1){
+		if(MCP4725_isConnected(&myMCP4725)){
 			
 			/* Print that the DAC is coonected */
 
@@ -109,7 +110,9 @@ int main(void)
 			/* Print that the DAC is NOT coonected */
 
 		}
-			
+
+		// Starting the timer:
+		HAL_TIM_Base_Start_IT(&htim1);
 		
   /* USER CODE END 2 */
 
@@ -168,7 +171,15 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	// Create a 10Hz sine wave:	
+	setValue((uint16_t)( sinf( 2 * 3.141592 * 10 * (micro_seconds++) / 1000.0 ) * 2047 + 2048));
+}
 
+uint8_t setValue(uint16_t value){
+	return MCP4725_setValue(&myMCP4725, value, MCP4725_FAST_MODE, MCP4725_POWER_DOWN_OFF);
+}	
 /* USER CODE END 4 */
 
 /**
