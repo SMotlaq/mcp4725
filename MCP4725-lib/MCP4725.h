@@ -105,29 +105,31 @@ typedef struct MCP
 
 
 // Publics:
-MCP4725 MCP4725_init(I2C_HandleTypeDef* hi2c, MCP4725Ax_ADDRESS addr, float refV);
+MCP4725 	MCP4725_init(I2C_HandleTypeDef* hi2c, MCP4725Ax_ADDRESS addr, float refV);
 
-void			setReferenceVoltage(MCP4725* _MCP4725, float value);
-float			getReferenceVoltage(MCP4725* _MCP4725);
+uint8_t 	MCP4725_isConnected(MCP4725* _MCP4725);
 
-uint8_t		setValue(MCP4725* _MCP4725, uint16_t value, MCP4725_COMMAND_TYPE mode, MCP4725_POWER_DOWN_TYPE powerType);
-uint8_t		setVoltage(MCP4725* _MCP4725, float voltage, MCP4725_COMMAND_TYPE mode, MCP4725_POWER_DOWN_TYPE powerType);
+void			MCP4725_setReferenceVoltage(MCP4725* _MCP4725, float value);
+float			MCP4725_getReferenceVoltage(MCP4725* _MCP4725);
 
-uint16_t	getValue(MCP4725* _MCP4725);
-float			getVoltage(MCP4725* _MCP4725);
-uint16_t	getStoredValue(MCP4725* _MCP4725);
-float			getStoredVoltage(MCP4725* _MCP4725);
+uint8_t		MCP4725_setValue(MCP4725* _MCP4725, uint16_t value, MCP4725_COMMAND_TYPE mode, MCP4725_POWER_DOWN_TYPE powerType);
+uint8_t		MCP4725_setVoltage(MCP4725* _MCP4725, float voltage, MCP4725_COMMAND_TYPE mode, MCP4725_POWER_DOWN_TYPE powerType);
 
-uint16_t	getPowerType(MCP4725* _MCP4725);
-uint16_t	getStoredPowerType(MCP4725* _MCP4725);
+uint16_t	MCP4725_getValue(MCP4725* _MCP4725);
+float			MCP4725_getVoltage(MCP4725* _MCP4725);
+uint16_t	MCP4725_getStoredValue(MCP4725* _MCP4725);
+float			MCP4725_getStoredVoltage(MCP4725* _MCP4725);
 
-void			reset(MCP4725* _MCP4725);
-void			wakeUP(MCP4725* _MCP4725);
+uint16_t	MCP4725_getPowerType(MCP4725* _MCP4725);
+uint16_t	MCP4725_getStoredPowerType(MCP4725* _MCP4725);
+
+void			MCP4725_reset(MCP4725* _MCP4725);
+void			MCP4725_wakeUP(MCP4725* _MCP4725);
 
 // Privates:
-uint8_t		getEepromBusyFlag(MCP4725* _MCP4725);
-uint8_t		writeComand(MCP4725* _MCP4725, uint16_t value, MCP4725_COMMAND_TYPE mode, MCP4725_POWER_DOWN_TYPE powerType);
-uint16_t	readRegister(MCP4725* _MCP4725, MCP4725_READ_TYPE dataType);
+uint8_t		MCP4725_getEepromBusyFlag(MCP4725* _MCP4725);
+uint8_t		MCP4725_writeComand(MCP4725* _MCP4725, uint16_t value, MCP4725_COMMAND_TYPE mode, MCP4725_POWER_DOWN_TYPE powerType);
+uint16_t	MCP4725_readRegister(MCP4725* _MCP4725, MCP4725_READ_TYPE dataType);
 
 
 #endif

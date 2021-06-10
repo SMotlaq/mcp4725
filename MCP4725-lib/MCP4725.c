@@ -32,7 +32,7 @@
 
 /**************************************************************************/
 /*
-    MCP4725()
+    MCP4725_init()
 
     Constructor
 */
@@ -44,9 +44,21 @@ MCP4725 MCP4725_init(I2C_HandleTypeDef* hi2c, MCP4725Ax_ADDRESS addr, float refV
 	_MCP4725._i2cAddress = addr;
 	_MCP4725.hi2c = hi2c;
 
-	setReferenceVoltage(&_MCP4725, refV); //set _refVoltage & _bitsPerVolt variables
+	MCP4725_setReferenceVoltage(&_MCP4725, refV); //set _refVoltage & _bitsPerVolt variables
 
 	return _MCP4725;
+}
+
+/**************************************************************************/
+/*
+    MCP4725_isConnected()
+
+    Check the connection 
+*/
+/**************************************************************************/ 
+uint8_t MCP4725_isConnected(MCP4725* _MCP4725)
+{
+	return HAL_I2C_IsDeviceReady(_MCP4725->hi2c, _MCP4725->_i2cAddress, 10, 1000) == HAL_OK;
 }
 
 /**************************************************************************/
@@ -56,7 +68,7 @@ MCP4725 MCP4725_init(I2C_HandleTypeDef* hi2c, MCP4725Ax_ADDRESS addr, float refV
     Set reference voltage
 */
 /**************************************************************************/
-void setReferenceVoltage(MCP4725* _MCP4725, float value)
+void MCP4725_setReferenceVoltage(MCP4725* _MCP4725, float value)
 {
    if   (value == 0) _MCP4725->_refVoltage = MCP4725_REFERENCE_VOLTAGE; //sanity check, avoid division by zero
    else              _MCP4725->_refVoltage = value;    
@@ -71,7 +83,7 @@ void setReferenceVoltage(MCP4725* _MCP4725, float value)
     Return reference voltage
 */
 /**************************************************************************/
-float getReferenceVoltage(MCP4725* _MCP4725)
+float MCP4725_getReferenceVoltage(MCP4725* _MCP4725)
 {
   return _MCP4725->_refVoltage;
 }
@@ -99,13 +111,13 @@ float getReferenceVoltage(MCP4725* _MCP4725)
       - "MCP4725_POWER_DOWN_500KOHM"..power down on with 500kOhm to ground
 */
 /**************************************************************************/ 
-uint8_t setValue(MCP4725* _MCP4725, uint16_t value, MCP4725_COMMAND_TYPE mode, MCP4725_POWER_DOWN_TYPE powerType)
+uint8_t MCP4725_setValue(MCP4725* _MCP4725, uint16_t value, MCP4725_COMMAND_TYPE mode, MCP4725_POWER_DOWN_TYPE powerType)
 {
   #ifndef MCP4725_DISABLE_SANITY_CHECK
   if (value > MCP4725_MAX_VALUE) value = MCP4725_MAX_VALUE; //make sure value never exceeds threshold
   #endif
 
-  return writeComand(_MCP4725, value, mode, powerType);
+  return MCP4725_writeComand(_MCP4725, value, mode, powerType);
 }
 
 /**************************************************************************/
@@ -115,7 +127,7 @@ uint8_t setValue(MCP4725* _MCP4725, uint16_t value, MCP4725_COMMAND_TYPE mode, M
     Set output voltage to a fraction of Vref
 */
 /**************************************************************************/ 
-uint8_t setVoltage(MCP4725* _MCP4725, float voltage, MCP4725_COMMAND_TYPE mode, MCP4725_POWER_DOWN_TYPE powerType)
+uint8_t MCP4725_setVoltage(MCP4725* _MCP4725, float voltage, MCP4725_COMMAND_TYPE mode, MCP4725_POWER_DOWN_TYPE powerType)
 {
   uint16_t value = 0;
 
@@ -128,7 +140,7 @@ uint8_t setVoltage(MCP4725* _MCP4725, float voltage, MCP4725_COMMAND_TYPE mode, 
   value = voltage * _bitsPerVolt;                                											 //xx,xx,xx,xx,D11,D10,D9,D8 ,D7,D6,D4,D3,D2,D9,D1,D0
   #endif
 
-  return writeComand(_MCP4725, value, mode, powerType);
+  return MCP4725_writeComand(_MCP4725, value, mode, powerType);
 }
 
 /**************************************************************************/
@@ -141,9 +153,9 @@ uint8_t setVoltage(MCP4725* _MCP4725, float voltage, MCP4725_COMMAND_TYPE mode, 
     - see MCP4725 datasheet on p.20
 */
 /**************************************************************************/ 
-uint16_t getValue(MCP4725* _MCP4725)
+uint16_t MCP4725_getValue(MCP4725* _MCP4725)
 {
-  uint16_t value = readRegister(_MCP4725, MCP4725_READ_DAC_REG); //D11,D10,D9,D8,D7,D6,D5,D4, D3,D2,D1,D0,xx,xx,xx,xx        
+  uint16_t value = MCP4725_readRegister(_MCP4725, MCP4725_READ_DAC_REG); //D11,D10,D9,D8,D7,D6,D5,D4, D3,D2,D1,D0,xx,xx,xx,xx        
 
   if (value != MCP4725_ERROR) return value >> 4;       //00,00,00,00,D11,D10,D9,D8,  D7,D6,D5,D4,D3,D2,D1,D0
                               return value;            //collision on i2c bus
@@ -156,9 +168,9 @@ uint16_t getValue(MCP4725* _MCP4725)
     Read current DAC value from DAC register & convert to voltage
 */
 /**************************************************************************/ 
-float getVoltage(MCP4725* _MCP4725)
+float MCP4725_getVoltage(MCP4725* _MCP4725)
 {
-  float value = getValue(_MCP4725);
+  float value = MCP4725_getValue(_MCP4725);
 
   if (value != MCP4725_ERROR) return value / _MCP4725->_bitsPerVolt;
                               return value;
@@ -174,9 +186,9 @@ float getVoltage(MCP4725* _MCP4725)
     - see MCP4725 datasheet on p.20
 */
 /**************************************************************************/ 
-uint16_t getStoredValue(MCP4725* _MCP4725)
+uint16_t MCP4725_getStoredValue(MCP4725* _MCP4725)
 {
-  uint16_t value = readRegister(_MCP4725, MCP4725_READ_EEPROM); //xx,PD1,PD0,xx,D11,D10,D9,D8, D7,D6,D5,D4,D3,D2,D1,D0
+  uint16_t value = MCP4725_readRegister(_MCP4725, MCP4725_READ_EEPROM); //xx,PD1,PD0,xx,D11,D10,D9,D8, D7,D6,D5,D4,D3,D2,D1,D0
 
   if (value != MCP4725_ERROR) return value & 0x0FFF;  //00,00,00,00,D11,D10,D9,D8,   D7,D6,D5,D4,D3,D2,D1,D0
                               return value;           //collision on i2c bus
@@ -189,9 +201,9 @@ uint16_t getStoredValue(MCP4725* _MCP4725)
     Read stored DAC value from EEPROM & convert to voltage
 */
 /**************************************************************************/ 
-float getStoredVoltage(MCP4725* _MCP4725)
+float MCP4725_getStoredVoltage(MCP4725* _MCP4725)
 {
-  float value = getStoredValue(_MCP4725);
+  float value = MCP4725_getStoredValue(_MCP4725);
 
   if (value != MCP4725_ERROR) return value / _MCP4725->_bitsPerVolt;
                               return value;
@@ -219,9 +231,9 @@ float getStoredVoltage(MCP4725* _MCP4725)
     - see MCP4725 datasheet on p.20
 */
 /**************************************************************************/ 
-uint16_t getPowerType(MCP4725* _MCP4725)
+uint16_t MCP4725_getPowerType(MCP4725* _MCP4725)
 {
-  uint16_t value = readRegister(_MCP4725, MCP4725_READ_SETTINGS); //BSY,POR,xx,xx,xx,PD1,PD0,xx
+  uint16_t value = MCP4725_readRegister(_MCP4725, MCP4725_READ_SETTINGS); //BSY,POR,xx,xx,xx,PD1,PD0,xx
 
   if (value != MCP4725_ERROR)
   {
@@ -252,9 +264,9 @@ uint16_t getPowerType(MCP4725* _MCP4725)
     - see MCP4725 datasheet on p.20
 */
 /**************************************************************************/ 
-uint16_t getStoredPowerType(MCP4725* _MCP4725)
+uint16_t MCP4725_getStoredPowerType(MCP4725* _MCP4725)
 {
-  uint16_t value = readRegister(_MCP4725, MCP4725_READ_EEPROM); //xx,PD1,PD0,xx,D11,D10,D9,D8,  D7,D6,D5,D4,D3,D2,D1,D0
+  uint16_t value = MCP4725_readRegister(_MCP4725, MCP4725_READ_EEPROM); //xx,PD1,PD0,xx,D11,D10,D9,D8,  D7,D6,D5,D4,D3,D2,D1,D0
 
   if (value != MCP4725_ERROR)
   {
@@ -278,7 +290,7 @@ uint16_t getStoredPowerType(MCP4725* _MCP4725)
       increases above Vpor device takes a reset state
 */
 /**************************************************************************/ 
-void reset(MCP4725* _MCP4725)
+void MCP4725_reset(MCP4725* _MCP4725)
 {
   //Wire.beginTransmission(MCP4725_GENERAL_CALL_ADDRESS);
   //Wire.send(MCP4725_GENERAL_CALL_RESET);
@@ -302,7 +314,7 @@ void reset(MCP4725* _MCP4725)
       not affected
 */
 /**************************************************************************/ 
-void wakeUP(MCP4725* _MCP4725)
+void MCP4725_wakeUP(MCP4725* _MCP4725)
 {
   //Wire.beginTransmission(MCP4725_GENERAL_CALL_ADDRESS);
   //Wire.send(MCP4725_GENERAL_WAKE_UP);
@@ -325,9 +337,9 @@ void wakeUP(MCP4725* _MCP4725)
     - see MCP4725 datasheet on p.20
 */
 /**************************************************************************/ 
-uint8_t getEepromBusyFlag(MCP4725* _MCP4725)
+uint8_t MCP4725_getEepromBusyFlag(MCP4725* _MCP4725)
 {
-  uint16_t value = readRegister(_MCP4725, MCP4725_READ_SETTINGS); //BSY,POR,xx,xx,xx,PD1,PD0,xx
+  uint16_t value = MCP4725_readRegister(_MCP4725, MCP4725_READ_SETTINGS); //BSY,POR,xx,xx,xx,PD1,PD0,xx
 
   if (value != MCP4725_ERROR) return (value & 0x80)==0x80;		//1 - completed, 0 - incompleted
                               return 0;										//collision on i2c bus
@@ -362,7 +374,7 @@ uint8_t getEepromBusyFlag(MCP4725* _MCP4725)
       1,  1
 */
 /**************************************************************************/ 
-uint8_t	writeComand(MCP4725* _MCP4725, uint16_t value, MCP4725_COMMAND_TYPE mode, MCP4725_POWER_DOWN_TYPE powerType)
+uint8_t	MCP4725_writeComand(MCP4725* _MCP4725, uint16_t value, MCP4725_COMMAND_TYPE mode, MCP4725_POWER_DOWN_TYPE powerType)
 {
 	uint8_t buffer[3];
 	HAL_StatusTypeDef I2C_Stat;
@@ -401,9 +413,9 @@ uint8_t	writeComand(MCP4725* _MCP4725, uint16_t value, MCP4725_COMMAND_TYPE mode
 
   if (mode == MCP4725_EEPROM_MODE)
   {
-    if (getEepromBusyFlag(_MCP4725) == 1) return 1;                      //write completed, success!!!
+    if (MCP4725_getEepromBusyFlag(_MCP4725) == 1) return 1;                      //write completed, success!!!
                                      HAL_Delay(MCP4725_EEPROM_WRITE_TIME); //typical EEPROM write time 25 msec
-    if (getEepromBusyFlag(_MCP4725) == 1) return 1;                      //write completed, success!!!
+    if (MCP4725_getEepromBusyFlag(_MCP4725) == 1) return 1;                      //write completed, success!!!
                                      HAL_Delay(MCP4725_EEPROM_WRITE_TIME); //maximum EEPROM write time 25 + 25 = 50 msec
   }
 
@@ -424,7 +436,7 @@ uint8_t	writeComand(MCP4725* _MCP4725, uint16_t value, MCP4725_COMMAND_TYPE mode
     - see MCP4725 datasheet on p.20
 */
 /**************************************************************************/ 
-uint16_t readRegister(MCP4725* _MCP4725, MCP4725_READ_TYPE dataType)
+uint16_t MCP4725_readRegister(MCP4725* _MCP4725, MCP4725_READ_TYPE dataType)
 {
   uint16_t value = dataType;                             //convert enum to integer to avoid compiler warnings                                    
 	uint16_t ret_val = 0 ;

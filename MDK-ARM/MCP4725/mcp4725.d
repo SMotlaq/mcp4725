@@ -1,5 +1,5 @@
-mcp4725\mcp4725.o: ..\MPC4725-lib\MCP4725.c
-mcp4725\mcp4725.o: ..\MPC4725-lib\MCP4725.h
+mcp4725\mcp4725.o: ..\MCP4725-lib\MCP4725.c
+mcp4725\mcp4725.o: ..\MCP4725-lib\MCP4725.h
 mcp4725\mcp4725.o: ../Core/Inc/main.h
 mcp4725\mcp4725.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 mcp4725\mcp4725.o: ../Core/Inc/stm32f4xx_hal_conf.h

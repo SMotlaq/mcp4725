@@ -10,6 +10,7 @@
       <TargetName>MCP4725</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::.\ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -338,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F411xE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\MPC4725-lib</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\MPC4725-lib;..\MCP4725-lib</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -525,7 +526,7 @@
             <File>
               <FileName>MCP4725.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\MPC4725-lib\MCP4725.c</FilePath>
+              <FilePath>..\MCP4725-lib\MCP4725.c</FilePath>
             </File>
           </Files>
         </Group>
