@@ -61,7 +61,7 @@ uint8_t setValue(uint16_t value);
 	MCP4725 myMCP4725;
 	
 	uint32_t micro_seconds = 0;
-	uint16_t sine_Val = 0;
+
 /* USER CODE END 0 */
 
 /**
@@ -112,16 +112,16 @@ int main(void)
 		}
 
 		// Starting the timer:
-		HAL_TIM_Base_Start_IT(&htim1);
+		HAL_TIM_Base_Start_IT(&htim1); 
 		
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
-  {
+  {		
     /* USER CODE END WHILE */
-
+ 
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -173,8 +173,8 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	// Create a 10Hz sine wave:	
-	setValue((uint16_t)( sinf( 2 * 3.141592 * 10 * (micro_seconds++) / 1000.0 ) * 2047 + 2048));
+	// Create a 100Hz sine wave:	
+	setValue((uint16_t)( sinf( 2 * 3.141592 * 100 * (micro_seconds++) / 10000.0 ) * 2047 + 2048));
 }
 
 uint8_t setValue(uint16_t value){

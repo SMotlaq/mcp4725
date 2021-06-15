@@ -32,7 +32,7 @@
 #include "main.h"
 #include <math.h>
 
-//#define MCP4725_DISABLE_SANITY_CHECK     //disable some sanity checks to increase speed, use with caution
+#define MCP4725_DISABLE_SANITY_CHECK     //disable some sanity checks to increase speed, use with caution
 
 /* dac addresses */
 typedef enum
@@ -87,11 +87,11 @@ MCP4725_READ_TYPE;
 
 /* dac mics. */
 #define MCP4725_RESOLUTION           12                           //resolution 12-bit
-#define MCP4725_STEPS                pow(2, (MCP4725_RESOLUTION)) //quantity of DAC steps 2^12-bits = 4096
+#define MCP4725_STEPS                4096 //pow(2, (MCP4725_RESOLUTION)) //quantity of DAC steps 2^12-bits = 4096
 #define MCP4725_EEPROM_WRITE_TIME    25                           //non-volatile memory write time, maximum 50 msec
 
 #define MCP4725_REFERENCE_VOLTAGE    3.30                         //supply-reference votltage
-#define MCP4725_MAX_VALUE            ((MCP4725_STEPS) - 1)
+#define MCP4725_MAX_VALUE            4095 //((MCP4725_STEPS) - 1)
 #define MCP4725_ERROR                0xFFFF                       //returns 65535, if communication error is occurred
 
 typedef struct MCP

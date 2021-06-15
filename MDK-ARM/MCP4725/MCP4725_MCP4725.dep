@@ -1,7 +1,7 @@
 Dependencies for Project 'MCP4725', Target 'MCP4725': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::.\ARMCC
 F (startup_stm32f411xe.s)(0x60C21EA2)(--cpu Cortex-M4.fp.sp -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_MCP4725-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 530" --pd "_RTE_ SETA 1" --pd "STM32F411xE SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f411xe.lst --xref -o mcp4725\startup_stm32f411xe.o --depend mcp4725\startup_stm32f411xe.d)
-F (../Core/Src/main.c)(0x60C2215E)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\MPC4725-lib -I ..\MCP4725-lib-I.\RTE\_MCP4725-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F411xE -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F411xE-o mcp4725\main.o --omf_browse mcp4725\main.crf --depend mcp4725\main.d)
+F (../Core/Src/main.c)(0x60C8B77E)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\MPC4725-lib -I ..\MCP4725-lib-I.\RTE\_MCP4725-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F411xE -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F411xE-o mcp4725\main.o --omf_browse mcp4725\main.crf --depend mcp4725\main.d)
 I (../Core/Inc/main.h)(0x60C21E9F)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5FA3F1DD)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x60C21E9F)
@@ -37,7 +37,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5FA3F1DD)
 I (../Core/Inc/i2c.h)(0x60C21E9E)
 I (../Core/Inc/tim.h)(0x60C21E9E)
 I (../Core/Inc/gpio.h)(0x60C21E9D)
-I (..\MCP4725-lib\MCP4725.h)(0x60C22178)
+I (..\MCP4725-lib\MCP4725.h)(0x60C8B523)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5E538192)
 F (../Core/Src/gpio.c)(0x60C21E9D)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\MPC4725-lib -I ..\MCP4725-lib-I.\RTE\_MCP4725-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F411xE -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F411xE-o mcp4725\gpio.o --omf_browse mcp4725\gpio.crf --depend mcp4725\gpio.d)
 I (../Core/Inc/gpio.h)(0x60C21E9D)
@@ -107,7 +107,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x5FA3F1DD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5FA3F1DD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5FA3F1DD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5FA3F1DD)
-F (../Core/Src/tim.c)(0x60C21E9E)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\MPC4725-lib -I ..\MCP4725-lib-I.\RTE\_MCP4725-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F411xE -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F411xE-o mcp4725\tim.o --omf_browse mcp4725\tim.crf --depend mcp4725\tim.d)
+F (../Core/Src/tim.c)(0x60C8B5D9)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\MPC4725-lib -I ..\MCP4725-lib-I.\RTE\_MCP4725-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F411xE -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F411xE-o mcp4725\tim.o --omf_browse mcp4725\tim.crf --depend mcp4725\tim.d)
 I (../Core/Inc/tim.h)(0x60C21E9E)
 I (../Core/Inc/main.h)(0x60C21E9F)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5FA3F1DD)
@@ -785,7 +785,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5FA3F1DD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5FA3F1DD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5FA3F1DD)
 F (..\MCP4725-lib\MCP4725.c)(0x60C2171A)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\MPC4725-lib -I ..\MCP4725-lib-I.\RTE\_MCP4725-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F411xE -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F411xE-o mcp4725\mcp4725.o --omf_browse mcp4725\mcp4725.crf --depend mcp4725\mcp4725.d)
-I (..\MCP4725-lib\MCP4725.h)(0x60C22178)
+I (..\MCP4725-lib\MCP4725.h)(0x60C8B523)
 I (../Core/Inc/main.h)(0x60C21E9F)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5FA3F1DD)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x60C21E9F)
